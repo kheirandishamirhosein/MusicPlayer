@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.NowPlayingMusic"
+    android:background="@color/dark1">
+    
+    <ImageView
+        android:id="@+id/iv_now_music"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginVertical="5dp"
+        android:src="@drawable/ic_music_list" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/ab_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        app:icon="@drawable/ic_skip_next"
+        app:iconTint="@color/white"
+        android:backgroundTint="@color/dark1"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        app:iconSize="40dp"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/ab_pause_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_play"
+        app:iconTint="@color/white"
+        android:backgroundTint="@color/dark1"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/ab_next"
+        android:layout_marginHorizontal="5dp"
+        app:iconSize="40dp"/>
+    
+    <TextView
+        android:id="@+id/tv_now_playing_song"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        tools:text="name song"
+        android:layout_toStartOf="@id/ab_pause_play"
+        android:layout_toEndOf="@id/iv_now_music"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true" />
+
+
+
+</RelativeLayout>

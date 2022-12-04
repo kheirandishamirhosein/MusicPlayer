@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android/project/me/Amirhoseinmusicplayer/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1395" />
+        <entry key="..\:/Android/project/me/Amirhoseinmusicplayer/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Android/project/me/Amirhoseinmusicplayer/app/src/main/res/drawable/selector_play_button.xml" value="0.119" />
+        <entry key="..\:/Android/project/me/Amirhoseinmusicplayer/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Android/project/me/Amirhoseinmusicplayer/app/src/main/res/layout/activity_music_player.xml" value="0.2" />
+        <entry key="..\:/Android/project/me/Amirhoseinmusicplayer/app/src/main/res/layout/recycler_item_list_music.xml" value="0.221875" />
+        <entry key="..\:/Android/project/me/Amirhoseinmusicplayer/app/src/main/res/xml/filepaths.xml" value="0.221875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
