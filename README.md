@@ -25,6 +25,6 @@ Music player components for users to use:
 2. search item
 3. delete song item
 4. share song item
-5. no play song
+5. now play song
 6. Music player components( play btn , pause btn , seekbar , ...)
 7. notification 
