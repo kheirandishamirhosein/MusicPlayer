@@ -34,7 +34,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_list_songs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:scrollbarThumbVertical="@drawable/ic_scroll_bar"
         app:layout_constraintStart_toStartOf="parent"

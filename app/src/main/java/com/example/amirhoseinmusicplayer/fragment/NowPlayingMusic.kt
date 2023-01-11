@@ -1,9 +1,7 @@
 package com.example.amirhoseinmusicplayer.fragment
 
-import android.annotation.SuppressLint
 import android.media.MediaMetadataRetriever
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,20 +9,18 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.amirhoseinmusicplayer.R
-import com.example.amirhoseinmusicplayer.activity.MusicPlayerActivity
 import com.example.amirhoseinmusicplayer.databinding.FragmentNowPlayingMusicBinding
 import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
-import com.example.amirhoseinmusicplayer.service.NotificationReceiver
+import com.example.amirhoseinmusicplayer.mediaplayer.PlayMode
+import com.example.amirhoseinmusicplayer.mediaplayer.PlayerStatus
+import com.example.amirhoseinmusicplayer.model.AudioModel
 
 
 class NowPlayingMusic : Fragment() {
 
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        lateinit var binding: FragmentNowPlayingMusicBinding
-        var musicPlayerActivity = MusicPlayerActivity()
-        var notificationReceiver = NotificationReceiver()
-    }
+    private lateinit var binding: FragmentNowPlayingMusicBinding
+    private val mediaPlayer = AudioMediaPlayer
+    private var prevSong: AudioModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,79 +30,37 @@ class NowPlayingMusic : Fragment() {
         val view = inflater.inflate(R.layout.fragment_now_playing_music, container, false)
         binding = FragmentNowPlayingMusicBinding.bind(view)
         binding.root.visibility = View.INVISIBLE
-        Log.d("sdsdsd", "on Create View")
-
         //pause play
         binding.abPausePlay.setOnClickListener {
-            Log.d("sdsdsd", "abPausePlay.setOnClickListener")
-            if (MusicPlayerActivity.mediaPlayer.isPlaying) pauseNowMusic() else playNowMusic()
+            mediaPlayer.toggle()
         }
         //next
         binding.abNext.setOnClickListener {
-            Log.d("sdsdsd", "abNext.setOnClickListener")
-            nextNowMusic()
+            mediaPlayer.playNext()
         }
-
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("sdsdsd", "on resume")
-        if (MusicPlayerActivity.musicService != null) {
-            binding.root.visibility = View.VISIBLE
-            binding.tvNowPlayingSong.isSelected = true
-            //image loading
-            val image = getAlbumArt(MusicPlayerActivity.currentSong.path)
-            Glide.with(this)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mediaPlayer.status.observe(viewLifecycleOwner) { showPlayerStatus(it) }
+    }
+
+    private fun showPlayerStatus(status: PlayerStatus) = with(binding) {
+        root.visibility = if (status.mode != PlayMode.STOP) View.VISIBLE else View.GONE
+        abPausePlay.setIconResource(if (status.mode == PlayMode.PLAY) R.drawable.ic_pause else R.drawable.ic_play)
+        if (prevSong != status.currentSong) {
+            tvNowPlayingSong.text = status.currentSong.title
+            val image = getAlbumArt(status.currentSong.path)
+            Glide.with(this@NowPlayingMusic)
                 .load(image)
                 .apply(RequestOptions().placeholder(R.drawable.ic_music_list).centerCrop())
-                .into(binding.ivNowMusic)
-            //MusicPlayerActivity.musicService!!.showNotification(R.drawable.ic_play)
-            binding.tvNowPlayingSong.text = MusicPlayerActivity.currentSong.title
-            if (MusicPlayerActivity.mediaPlayer.isPlaying)
-                binding.abPausePlay.setIconResource(R.drawable.ic_pause)
-            else binding.abPausePlay.setIconResource(R.drawable.ic_play)
+                .into(ivNowMusic)
         }
+        prevSong = status.currentSong
     }
 
-    //play now music
-    private fun playNowMusic() {
-        Log.d("sdsdsd", "play Now Music")
-        MusicPlayerActivity.mediaPlayer.start()
-        binding.abPausePlay.setIconResource(R.drawable.ic_pause)
-        MusicPlayerActivity.musicService!!.showNotification(R.drawable.ic_pause)
-        MusicPlayerActivity.ivNext?.setIconResource(R.drawable.ic_pause)
-    }
-
-    //pause now music
-    private fun pauseNowMusic() {
-        Log.d("sdsdsd", "pause Now Music")
-        MusicPlayerActivity.mediaPlayer.pause()
-        binding.abPausePlay.setIconResource(R.drawable.ic_play)
-        MusicPlayerActivity.musicService!!.showNotification(R.drawable.ic_play)
-        MusicPlayerActivity.ivNext?.setIconResource(R.drawable.ic_play)
-    }
-
-    //next now music
-    private fun nextNowMusic() {
-        if (AudioMediaPlayer.currentIndex == MusicPlayerActivity.songsList.size - 1)
-            return
-        AudioMediaPlayer.currentIndex += 0
-        MusicPlayerActivity.mediaPlayer.reset()
-        //image loading
-        val image = getAlbumArt(MusicPlayerActivity.currentSong.path)
-        Glide.with(this)
-            .load(image)
-            .apply(RequestOptions().placeholder(R.drawable.ic_music_list).centerCrop())
-            .into(binding.ivNowMusic)
-        //title song
-        binding.tvNowPlayingSong.text = MusicPlayerActivity.currentSong.title
-        MusicPlayerActivity.musicService!!.showNotification(R.drawable.ic_pause)
-        playNowMusic()
-    }
-
-    //image loading
     private fun getAlbumArt(uri: String): ByteArray? {
         val uriAlbumArt = MediaMetadataRetriever()
         uriAlbumArt.setDataSource(uri)
