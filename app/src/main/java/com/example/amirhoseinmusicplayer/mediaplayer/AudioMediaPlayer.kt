@@ -3,6 +3,7 @@ package com.example.amirhoseinmusicplayer.mediaplayer
 import android.media.MediaPlayer
 import android.os.Handler
 import android.os.Looper
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.amirhoseinmusicplayer.model.AudioModel
@@ -97,8 +98,10 @@ object AudioMediaPlayer : MediaPlayer() {
         this.onShuffle = !onShuffle
         if (onShuffle) {
             this.songs = originalSongs.shuffled()
+            play(songs[currentIndex])
         } else {
             this.songs = originalSongs
+            play(originalSongs[currentIndex])
         }
         calculateStatus()
     }
