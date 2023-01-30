@@ -38,8 +38,8 @@ class MusicPlayerActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        binding.ivShuffle.setOnClickListener { mediaPlayer.shuffle() }
-        binding.ivRepeat.setOnClickListener { mediaPlayer.repeat() }
+        binding.ivShuffle.setOnClickListener { mediaPlayer.shuffle(this) }
+        binding.ivRepeat.setOnClickListener { mediaPlayer.repeat(this) }
         binding.ivPausePlay.setOnClickListener { mediaPlayer.toggle() }
         binding.ivNext.setOnClickListener { mediaPlayer.playNext() }
         binding.ivPrevious.setOnClickListener { mediaPlayer.playPrevious() }

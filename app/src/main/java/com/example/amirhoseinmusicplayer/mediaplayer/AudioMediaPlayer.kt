@@ -1,5 +1,6 @@
 package com.example.amirhoseinmusicplayer.mediaplayer
 
+import android.app.Activity
 import android.media.MediaPlayer
 import android.os.Handler
 import android.os.Looper
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.amirhoseinmusicplayer.model.AudioModel
+import java.util.*
 
 object AudioMediaPlayer : MediaPlayer() {
     private lateinit var originalSongs: List<AudioModel>
@@ -45,6 +47,9 @@ object AudioMediaPlayer : MediaPlayer() {
             if (onRepeat) {
                 play(songs[currentIndex])
                 seekTo(0)
+                if (onShuffle) {
+                    shuffleStatus()
+                }
             } else {
                 playNext()
             }
@@ -72,12 +77,16 @@ object AudioMediaPlayer : MediaPlayer() {
     }
 
     fun playNext() {
-        if (currentIndex == songs.lastIndex) {
-            return
+        if (onShuffle) {
+            shuffleStatus()
+        } else {
+            if (currentIndex == songs.lastIndex) {
+                return
+            }
+            currentIndex += 1
+            play(songs[currentIndex])
+            calculateStatus()
         }
-        currentIndex += 1
-        play(songs[currentIndex])
-        calculateStatus()
     }
 
     fun playPrevious() {
@@ -89,21 +98,40 @@ object AudioMediaPlayer : MediaPlayer() {
         calculateStatus()
     }
 
-    fun repeat() {
-        onRepeat = !onRepeat
+    fun repeat(activity: Activity) {
+        this.onRepeat = !onRepeat
+        if (onRepeat) {
+            Toast.makeText(activity, "Repeat ON", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(activity, "Repeat OFF", Toast.LENGTH_SHORT).show()
+        }
         calculateStatus()
     }
 
-    fun shuffle() {
+    fun shuffle(activity: Activity) {
         this.onShuffle = !onShuffle
         if (onShuffle) {
-            this.songs = originalSongs.shuffled()
-            play(songs[currentIndex])
+            Toast.makeText(activity, "Shuffle ON", Toast.LENGTH_SHORT).show()
         } else {
-            this.songs = originalSongs
-            play(originalSongs[currentIndex])
+            Toast.makeText(activity, "Shuffle OFF", Toast.LENGTH_SHORT).show()
         }
         calculateStatus()
+    }
+
+    private fun shuffleStatus() {
+        if (onShuffle) {
+            val random = Random()
+            currentIndex = random.nextInt(songs.size - 1 - 0 + 1) + 0
+            play(songs[currentIndex])
+        } else {
+            if (currentIndex < (songs.size - 1)) {
+                play(songs[currentIndex + 1])
+                currentIndex += 1
+            } else {
+                play(songs[0])
+                currentIndex = 0
+            }
+        }
     }
 
     override fun stop() {
