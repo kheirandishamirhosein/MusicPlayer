@@ -4,7 +4,7 @@ This is a personal music player that I made myself inspired by Google Market mus
 I used the following topics to make it :
 ---------------
 Songs List and Main Activity
-![list songs](https://user-images.githubusercontent.com/115555417/216772519-f14108d3-68dd-4977-be39-fe694e9f4fe7.png)
+![list songs](https://user-images.githubusercontent.com/115555417/216773761-7051bda9-d60b-4fe3-986a-24ada4dd363c.png)
 Music Player Activity
 ![player music](https://user-images.githubusercontent.com/115555417/216772773-594f4b09-6391-495e-9e17-77189475d66a.png)
 Now music Fragment
