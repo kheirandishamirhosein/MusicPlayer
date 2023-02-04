@@ -4,13 +4,21 @@ This is a personal music player that I made myself inspired by Google Market mus
 I used the following topics to make it :
 ---------------
 Songs List and Main Activity
+
 ![list songs](https://user-images.githubusercontent.com/115555417/216773761-7051bda9-d60b-4fe3-986a-24ada4dd363c.png)
+
 Music Player Activity
-![player music](https://user-images.githubusercontent.com/115555417/216772773-594f4b09-6391-495e-9e17-77189475d66a.png)
+
+![player music](https://user-images.githubusercontent.com/115555417/216774011-5b9d7db9-9843-4571-bb9d-a4f902caa07d.png)
+
 Now music Fragment
-![now music](https://user-images.githubusercontent.com/115555417/216772819-d811f954-df2f-450f-a7de-f164abc39b52.png)
+
+![now music](https://user-images.githubusercontent.com/115555417/216773985-28ef437b-6223-4328-9457-a9f3d1e5f381.png)
+
 Service Notification
-![service notification](https://user-images.githubusercontent.com/115555417/216772840-c509b88d-ccea-4e2c-8bf3-88304aa48f56.png)
+
+![service notification](https://user-images.githubusercontent.com/115555417/216774035-64b9916c-4730-4eed-bdf2-f9e2c74a5024.png)
+
 ---------------
 1. request Permission
 -> To access mobile phone audio files (permission.WRITE_EXTERNAL_STORAGE)
