@@ -3,6 +3,15 @@
 This is a personal music player that I made myself inspired by Google Market music players. I use different sources to make it.
 I used the following topics to make it :
 ---------------
+Songs List and Main Activity
+![list songs](https://user-images.githubusercontent.com/115555417/216772519-f14108d3-68dd-4977-be39-fe694e9f4fe7.png)
+Music Player Activity
+![player music](https://user-images.githubusercontent.com/115555417/216772773-594f4b09-6391-495e-9e17-77189475d66a.png)
+Now music Fragment
+![now music](https://user-images.githubusercontent.com/115555417/216772819-d811f954-df2f-450f-a7de-f164abc39b52.png)
+Service Notification
+![service notification](https://user-images.githubusercontent.com/115555417/216772840-c509b88d-ccea-4e2c-8bf3-88304aa48f56.png)
+---------------
 1. request Permission
 -> To access mobile phone audio files (permission.WRITE_EXTERNAL_STORAGE)
 2. MediaStore
