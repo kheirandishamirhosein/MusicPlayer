@@ -4,7 +4,7 @@ import android.media.MediaMetadataRetriever
 
 object ImageLoader {
 
-     fun getAlbumArt(uri: String): ByteArray? {
+    fun getAlbumArt(uri: String): ByteArray? {
         val uriAlbumArt = MediaMetadataRetriever()
         uriAlbumArt.setDataSource(uri)
         val art = uriAlbumArt.embeddedPicture

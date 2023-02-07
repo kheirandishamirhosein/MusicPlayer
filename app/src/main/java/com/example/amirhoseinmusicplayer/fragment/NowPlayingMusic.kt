@@ -1,6 +1,5 @@
 package com.example.amirhoseinmusicplayer.fragment
 
-import android.media.MediaMetadataRetriever
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
