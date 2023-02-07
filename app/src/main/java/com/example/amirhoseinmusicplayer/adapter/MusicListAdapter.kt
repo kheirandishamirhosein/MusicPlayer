@@ -1,17 +1,22 @@
 package com.example.amirhoseinmusicplayer.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.media.MediaMetadataRetriever
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.amirhoseinmusicplayer.R
+import com.example.amirhoseinmusicplayer.activity.MusicPlayerActivity
+import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
 import com.example.amirhoseinmusicplayer.model.AudioModel
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MusicListAdapter(

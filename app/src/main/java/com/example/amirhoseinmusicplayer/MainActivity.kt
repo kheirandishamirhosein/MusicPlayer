@@ -14,7 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.amirhoseinmusicplayer.adapter.MusicListAdapter
-import com.example.amirhoseinmusicplayer.data.ItemAdapter
+import com.example.amirhoseinmusicplayer.handler.MusicListHandler
 import com.example.amirhoseinmusicplayer.data.MusicRepository
 
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private var recyclerViewMusic: RecyclerView? = null
     private lateinit var musicListAdapter: MusicListAdapter
     private val musicRepository by lazy { MusicRepository(this) }
-    private val itemAdapter = ItemAdapter(this)
+    private val musicListHandler: MusicListHandler by lazy { MusicListHandler(this) }
 
     @SuppressLint("Recycle", "NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
         if (songsList.isEmpty()) {
             tvNoMusic.visibility = View.VISIBLE
         } else {
-            //recyclerview
-            musicListAdapter = MusicListAdapter(songsList, itemAdapter)
+            musicListAdapter = MusicListAdapter(songsList, musicListHandler)
+            musicListHandler.setAdapter(musicListAdapter)
             recyclerViewMusic?.layoutManager = LinearLayoutManager(this)
             recyclerViewMusic?.adapter = musicListAdapter
         }
@@ -86,8 +86,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val searchResult = musicRepository.search(newText ?: "")
-                musicListAdapter.updateList(searchResult)
+                musicListHandler.search(newText)
                 return true
             }
         })

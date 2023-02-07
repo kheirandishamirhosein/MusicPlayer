@@ -1,4 +1,4 @@
-package com.example.amirhoseinmusicplayer.data
+package com.example.amirhoseinmusicplayer.handler
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -13,6 +13,7 @@ import com.example.amirhoseinmusicplayer.R
 import com.example.amirhoseinmusicplayer.activity.MusicPlayerActivity
 import com.example.amirhoseinmusicplayer.adapter.MusicClickListener
 import com.example.amirhoseinmusicplayer.adapter.MusicListAdapter
+import com.example.amirhoseinmusicplayer.data.MusicRepository
 import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
 import com.example.amirhoseinmusicplayer.model.AudioModel
 import com.google.android.material.snackbar.Snackbar
@@ -23,14 +24,15 @@ import kotlin.Int
 import kotlin.getValue
 import kotlin.lazy
 
-class ItemAdapter(private val activity: Activity) : MusicClickListener {
+class MusicListHandler(private val activity: Activity) : MusicClickListener {
 
     private lateinit var musicListAdapter: MusicListAdapter
     private val musicRepository by lazy { MusicRepository(activity) }
+    private var playList: List<AudioModel> = musicRepository.loadSongs()
 
     override fun onMusicClick(musicIndex: Int) {
         //navigate to another activity
-        AudioMediaPlayer.startPlaying(musicRepository.loadSongs(), musicIndex)
+        AudioMediaPlayer.startPlaying(playList, musicIndex)
         val intent = Intent(activity, MusicPlayerActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         activity.startActivity(intent)
@@ -68,7 +70,7 @@ class ItemAdapter(private val activity: Activity) : MusicClickListener {
     private fun fileDeleted(audioModel: AudioModel, itemMenu: View) {
         val deleted = musicRepository.removeSong(audioModel)
         if (deleted) {
-            musicListAdapter.updateList(musicRepository.loadSongs())
+            updatePlayList(playList - audioModel)
         } else {
             Snackbar.make(itemMenu, "Can't be Deleted", Snackbar.LENGTH_LONG)
                 .show()
@@ -93,5 +95,19 @@ class ItemAdapter(private val activity: Activity) : MusicClickListener {
             Snackbar.make(view, "Can't be Shared", Snackbar.LENGTH_LONG)
                 .show()
         }
+    }
+
+    private fun updatePlayList(newPlayList: List<AudioModel>) {
+        this.playList = newPlayList
+        musicListAdapter.updateList(playList)
+    }
+
+    fun setAdapter(musicListAdapter: MusicListAdapter) {
+        this.musicListAdapter = musicListAdapter
+    }
+
+    fun search(query: String?) {
+        val searchResult = musicRepository.search(query ?: "")
+        updatePlayList(searchResult)
     }
 }

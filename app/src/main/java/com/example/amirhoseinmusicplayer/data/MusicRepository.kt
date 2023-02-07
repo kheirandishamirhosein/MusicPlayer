@@ -3,9 +3,12 @@ package com.example.amirhoseinmusicplayer.data
 import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
+import com.example.amirhoseinmusicplayer.activity.MusicPlayerActivity
+import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
 import com.example.amirhoseinmusicplayer.model.AudioModel
 import com.example.amirhoseinmusicplayer.util.DurationFormatter
 import java.io.File
@@ -19,7 +22,7 @@ import kotlin.arrayOf
 class MusicRepository(context: Context) {
   private val context = context.applicationContext
   private var songsList: List<AudioModel>? = null
-
+// tu in haalat context null nist dige
   fun loadSongs(): List<AudioModel> {
     if (songsList != null) return songsList!!
 

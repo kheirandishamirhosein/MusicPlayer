@@ -33,6 +33,7 @@ object AudioMediaPlayer : MediaPlayer() {
         currentIndex = index
         this.originalSongs = songs
         this.songs = songs
+        //
         play(songs[currentIndex])
         registerOnCompletionListener()
         startRunnable()
