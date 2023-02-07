@@ -31,7 +31,7 @@ class MusicListHandler(private val activity: Activity) : MusicClickListener {
     private var playList: List<AudioModel> = musicRepository.loadSongs()
 
     override fun onMusicClick(musicIndex: Int) {
-        //navigate to another activity
+        //navigate to another activity (intent)
         AudioMediaPlayer.startPlaying(playList, musicIndex)
         val intent = Intent(activity, MusicPlayerActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
