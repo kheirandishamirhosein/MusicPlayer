@@ -22,7 +22,7 @@ import kotlin.arrayOf
 class MusicRepository(context: Context) {
   private val context = context.applicationContext
   private var songsList: List<AudioModel>? = null
-// tu in haalat context null nist dige
+
   fun loadSongs(): List<AudioModel> {
     if (songsList != null) return songsList!!
 

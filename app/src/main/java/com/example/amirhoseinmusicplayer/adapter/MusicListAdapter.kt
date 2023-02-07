@@ -15,6 +15,7 @@ import com.example.amirhoseinmusicplayer.R
 import com.example.amirhoseinmusicplayer.activity.MusicPlayerActivity
 import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
 import com.example.amirhoseinmusicplayer.model.AudioModel
+import com.example.amirhoseinmusicplayer.util.ImageLoader
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -69,21 +70,13 @@ class MusicListAdapter(
       tvMusicTitle.text = audioModel.title
       tvMusicArtist.text = audioModel.artist
       tvMusicTime.text = audioModel.formattedDuration
-      val image = getAlbumArt(audioModel.path)
+      val image = ImageLoader.getAlbumArt(audioModel.path)
       Glide.with(ivMusicImage)
         .load(image)
         .apply(RequestOptions().placeholder(R.drawable.ic_music_list).centerCrop())
         .into(ivMusicImage)
     }
 
-    //image loading
-    private fun getAlbumArt(uri: String): ByteArray? {
-      val uriAlbumArt = MediaMetadataRetriever()
-      uriAlbumArt.setDataSource(uri)
-      val art = uriAlbumArt.embeddedPicture
-      uriAlbumArt.release()
-      return art
-    }
   }
 }
 

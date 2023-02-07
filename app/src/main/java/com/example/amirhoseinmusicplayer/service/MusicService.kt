@@ -15,6 +15,7 @@ import com.example.amirhoseinmusicplayer.R
 import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
 import com.example.amirhoseinmusicplayer.mediaplayer.PlayMode
 import com.example.amirhoseinmusicplayer.mediaplayer.PlayerStatus
+import com.example.amirhoseinmusicplayer.util.ImageLoader
 
 class MusicService : Service() {
     private lateinit var mediaSession: MediaSessionCompat
@@ -97,7 +98,7 @@ class MusicService : Service() {
             baseContext, 777, exitIntent, PendingIntent.FLAG_UPDATE_CURRENT
         )
         //image notification
-        val imgArt = getAlbumArt(status.currentSong.path)
+        val imgArt = ImageLoader.getAlbumArt(status.currentSong.path)
         val image = if (imgArt != null) {
             BitmapFactory.decodeByteArray(imgArt, 0, imgArt.size)
         } else {
@@ -124,15 +125,6 @@ class MusicService : Service() {
             .addAction(R.drawable.ic_exit_clear, "exit", exitPendingIntent)
             .build()
 
-    }
-
-    //image loading
-    private fun getAlbumArt(uri: String): ByteArray? {
-        val uriAlbumArt = MediaMetadataRetriever()
-        uriAlbumArt.setDataSource(uri)
-        val art = uriAlbumArt.embeddedPicture
-        uriAlbumArt.release()
-        return art
     }
 
     @SuppressLint("ObsoleteSdkInt")

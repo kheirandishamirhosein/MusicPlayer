@@ -16,6 +16,7 @@ import com.example.amirhoseinmusicplayer.mediaplayer.PlayMode
 import com.example.amirhoseinmusicplayer.mediaplayer.PlayerStatus
 import com.example.amirhoseinmusicplayer.service.MusicService
 import com.example.amirhoseinmusicplayer.util.DurationFormatter
+import com.example.amirhoseinmusicplayer.util.ImageLoader
 
 class MusicPlayerActivity : AppCompatActivity() {
 
@@ -64,15 +65,6 @@ class MusicPlayerActivity : AppCompatActivity() {
         })
     }
 
-    //image loading
-    private fun getAlbumArt(uri: String): ByteArray? {
-        val uriAlbumArt = MediaMetadataRetriever()
-        uriAlbumArt.setDataSource(uri)
-        val art = uriAlbumArt.embeddedPicture
-        uriAlbumArt.release()
-        return art
-    }
-
     private fun showPlayerStatus(newStatus: PlayerStatus) = with(binding) {
         ivShuffle.setImageResource(if (newStatus.onShuffle) R.drawable.ic_shuffle_on else R.drawable.ic_shuffle_off)
         ivRepeat.setImageResource(if (newStatus.onRepeat) R.drawable.ic_repeat_on else R.drawable.ic_repeat_off)
@@ -80,7 +72,7 @@ class MusicPlayerActivity : AppCompatActivity() {
             tvSongsTitle.text = newStatus.currentSong.title
             tvSongsArtist.text = newStatus.currentSong.artist
             tvTotalTime.text = newStatus.currentSong.formattedDuration
-            val image = getAlbumArt(newStatus.currentSong.path)
+            val image = ImageLoader.getAlbumArt(newStatus.currentSong.path)
             Glide.with(this@MusicPlayerActivity)
                 .load(image)
                 .apply(RequestOptions().placeholder(R.drawable.ic_music_list).centerCrop())

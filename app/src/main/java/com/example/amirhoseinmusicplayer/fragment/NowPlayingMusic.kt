@@ -14,6 +14,7 @@ import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
 import com.example.amirhoseinmusicplayer.mediaplayer.PlayMode
 import com.example.amirhoseinmusicplayer.mediaplayer.PlayerStatus
 import com.example.amirhoseinmusicplayer.model.AudioModel
+import com.example.amirhoseinmusicplayer.util.ImageLoader
 
 
 class NowPlayingMusic : Fragment() {
@@ -52,7 +53,7 @@ class NowPlayingMusic : Fragment() {
         abPausePlay.setIconResource(if (status.mode == PlayMode.PLAY) R.drawable.ic_pause else R.drawable.ic_play)
         if (prevSong != status.currentSong) {
             tvNowPlayingSong.text = status.currentSong.title
-            val image = getAlbumArt(status.currentSong.path)
+            val image = ImageLoader.getAlbumArt(status.currentSong.path)
             Glide.with(this@NowPlayingMusic)
                 .load(image)
                 .apply(RequestOptions().placeholder(R.drawable.ic_music_list).centerCrop())
@@ -61,11 +62,4 @@ class NowPlayingMusic : Fragment() {
         prevSong = status.currentSong
     }
 
-    private fun getAlbumArt(uri: String): ByteArray? {
-        val uriAlbumArt = MediaMetadataRetriever()
-        uriAlbumArt.setDataSource(uri)
-        val art = uriAlbumArt.embeddedPicture
-        uriAlbumArt.release()
-        return art
-    }
 }
