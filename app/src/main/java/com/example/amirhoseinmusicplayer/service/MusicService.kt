@@ -76,25 +76,25 @@ class MusicService : Service() {
         val previousIntent = Intent(this, NotificationReceiver::class.java)
             .setAction(PREVIOUS)
         val previousPendingIntent = PendingIntent.getBroadcast(
-            baseContext, 777, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT
+            baseContext, 777, previousIntent, PendingIntent.FLAG_IMMUTABLE//PendingIntent.FLAG_UPDATE_CURRENT
         )
         //next intent
         val nextIntent = Intent(this, NotificationReceiver::class.java)
             .setAction(NEXT)
         val nextPendingIntent = PendingIntent.getBroadcast(
-            baseContext, 777, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT
+            baseContext, 777, nextIntent, PendingIntent.FLAG_IMMUTABLE//PendingIntent.FLAG_UPDATE_CURRENT
         )
         //play intent
         val playIntent = Intent(this, NotificationReceiver::class.java)
             .setAction(PLAY)
         val playPendingIntent = PendingIntent.getBroadcast(
-            baseContext, 777, playIntent, PendingIntent.FLAG_UPDATE_CURRENT
+            baseContext, 777, playIntent, PendingIntent.FLAG_IMMUTABLE//PendingIntent.FLAG_UPDATE_CURRENT
         )
         //exit intent
         val exitIntent = Intent(this, NotificationReceiver::class.java)
             .setAction(EXIT)
         val exitPendingIntent = PendingIntent.getBroadcast(
-            baseContext, 777, exitIntent, PendingIntent.FLAG_UPDATE_CURRENT
+            baseContext, 777, exitIntent, PendingIntent.FLAG_IMMUTABLE//PendingIntent.FLAG_UPDATE_CURRENT
         )
         //image notification
         val imgArt = ImageLoader.getAlbumArt(status.currentSong.path)
