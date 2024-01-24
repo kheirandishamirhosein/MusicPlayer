@@ -36,7 +36,6 @@ Service Notification
 10. class Application
 11. service for notification
 13. oop
-14. repositiry
 ---------------
 Music player components for users to use:
 1. list songs
