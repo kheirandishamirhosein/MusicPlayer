@@ -1,4 +1,4 @@
-package com.example.amirhoseinmusicplayer.mediaplayer
+package com.example.amirhoseinmusicplayer.data.mediaplayer
 
 import com.example.amirhoseinmusicplayer.model.AudioModel
 

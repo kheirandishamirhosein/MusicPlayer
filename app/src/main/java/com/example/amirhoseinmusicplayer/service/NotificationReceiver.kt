@@ -3,7 +3,7 @@ package com.example.amirhoseinmusicplayer.service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
+import com.example.amirhoseinmusicplayer.data.mediaplayer.AudioMediaPlayer
 
 class NotificationReceiver : BroadcastReceiver() {
     private val mediaPlayer: AudioMediaPlayer = AudioMediaPlayer

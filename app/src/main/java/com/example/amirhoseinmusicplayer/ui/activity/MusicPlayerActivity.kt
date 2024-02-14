@@ -1,4 +1,4 @@
-package com.example.amirhoseinmusicplayer.activity
+package com.example.amirhoseinmusicplayer.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,11 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.amirhoseinmusicplayer.R
-import com.example.amirhoseinmusicplayer.data.MusicRepository
+import com.example.amirhoseinmusicplayer.data.repository.MusicRepository
 import com.example.amirhoseinmusicplayer.databinding.ActivityMusicPlayerBinding
-import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
-import com.example.amirhoseinmusicplayer.mediaplayer.PlayMode
-import com.example.amirhoseinmusicplayer.mediaplayer.PlayerStatus
+import com.example.amirhoseinmusicplayer.data.mediaplayer.AudioMediaPlayer
+import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayMode
+import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayerStatus
 import com.example.amirhoseinmusicplayer.service.MusicService
 import com.example.amirhoseinmusicplayer.util.DurationFormatter
 import com.example.amirhoseinmusicplayer.util.ImageLoader
@@ -22,12 +22,15 @@ class MusicPlayerActivity : AppCompatActivity() {
     private var mediaPlayer: AudioMediaPlayer = AudioMediaPlayer
     private var previousStatus: PlayerStatus? = null
 
+    //manual DI
+    private val musicRepository: MusicRepository by lazy {
+        MusicRepository(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMusicPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //call Repository
-        val musicRepository = MusicRepository(this)
         //back activity
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         //init starting service

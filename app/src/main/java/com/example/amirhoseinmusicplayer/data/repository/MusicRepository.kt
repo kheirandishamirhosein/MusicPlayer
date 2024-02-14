@@ -1,4 +1,4 @@
-package com.example.amirhoseinmusicplayer.data
+package com.example.amirhoseinmusicplayer.data.repository
 
 import android.annotation.SuppressLint
 import android.content.ContentUris
@@ -8,16 +8,22 @@ import android.net.Uri
 import android.provider.MediaStore
 import com.example.amirhoseinmusicplayer.model.AudioModel
 import com.example.amirhoseinmusicplayer.util.DurationFormatter
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import java.lang.Long
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.String
 import kotlin.arrayOf
 
-class MusicRepository(context: Context) {
-    private val context = context.applicationContext
+@Singleton
+class MusicRepository @Inject constructor(
+    @ApplicationContext private val context: Context
+) {
+    //private val context = context.applicationContext
     private var songsList: List<AudioModel>? = null
 
     fun loadSongs(): List<AudioModel> {

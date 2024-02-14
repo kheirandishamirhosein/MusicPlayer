@@ -1,4 +1,4 @@
-package com.example.amirhoseinmusicplayer.fragment
+package com.example.amirhoseinmusicplayer.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +9,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.amirhoseinmusicplayer.R
 import com.example.amirhoseinmusicplayer.databinding.FragmentNowPlayingMusicBinding
-import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
-import com.example.amirhoseinmusicplayer.mediaplayer.PlayMode
-import com.example.amirhoseinmusicplayer.mediaplayer.PlayerStatus
+import com.example.amirhoseinmusicplayer.data.mediaplayer.AudioMediaPlayer
+import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayMode
+import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayerStatus
 import com.example.amirhoseinmusicplayer.model.AudioModel
 import com.example.amirhoseinmusicplayer.util.ImageLoader
-
+import dagger.hilt.android.AndroidEntryPoint
 
 class NowPlayingMusic : Fragment() {
 

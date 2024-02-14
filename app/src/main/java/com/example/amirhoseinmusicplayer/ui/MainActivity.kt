@@ -1,4 +1,4 @@
-package com.example.amirhoseinmusicplayer
+package com.example.amirhoseinmusicplayer.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -13,16 +13,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.amirhoseinmusicplayer.adapter.MusicListAdapter
-import com.example.amirhoseinmusicplayer.handler.MusicListHandler
-import com.example.amirhoseinmusicplayer.data.MusicRepository
+import com.example.amirhoseinmusicplayer.R
+import com.example.amirhoseinmusicplayer.data.handler.MusicListHandler
+import com.example.amirhoseinmusicplayer.ui.adapter.MusicListAdapter
+import com.example.amirhoseinmusicplayer.data.repository.MusicRepository
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var recyclerViewMusic: RecyclerView? = null
     private lateinit var musicListAdapter: MusicListAdapter
-    private val musicRepository by lazy { MusicRepository(this) }
-    private val musicListHandler: MusicListHandler by lazy { MusicListHandler(this) }
+    // inject musicRepository & musicListHandler
+    @Inject lateinit var musicRepository: MusicRepository
+    @Inject lateinit var musicListHandler: MusicListHandler
+    //private val musicRepository by lazy { MusicRepository(this) }
+    //private val musicListHandler: MusicListHandler by lazy { MusicListHandler(this) }
 
     @SuppressLint("Recycle", "NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {

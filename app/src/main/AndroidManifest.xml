@@ -12,7 +12,7 @@
 
     <!--android 10 only request android : requestLegacyExternalStorage="true"-->
     <application
-        android:name=".ApplicationClass"
+        android:name=".app.ApplicationClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,11 +21,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AmirhoseinMusicPlayer">
         <activity
-            android:name=".activity.MusicPlayerActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".ui.activity.MusicPlayerActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

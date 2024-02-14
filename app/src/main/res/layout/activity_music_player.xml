@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark1"
-    tools:context=".activity.MusicPlayerActivity">
+    tools:context=".ui.activity.MusicPlayerActivity">
 
     <TextView
         android:id="@+id/tv_songs_Title"
