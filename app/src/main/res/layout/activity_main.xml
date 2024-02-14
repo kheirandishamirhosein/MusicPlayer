@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark1"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +52,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fr_now_playing"
-            android:name="com.example.amirhoseinmusicplayer.fragment.NowPlayingMusic"
+            android:name="com.example.amirhoseinmusicplayer.ui.fragment.NowPlayingMusic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

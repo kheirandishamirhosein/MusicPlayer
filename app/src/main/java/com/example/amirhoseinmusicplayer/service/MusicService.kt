@@ -11,9 +11,9 @@ import android.support.v4.media.session.MediaSessionCompat
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.Observer
 import com.example.amirhoseinmusicplayer.R
-import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
-import com.example.amirhoseinmusicplayer.mediaplayer.PlayMode
-import com.example.amirhoseinmusicplayer.mediaplayer.PlayerStatus
+import com.example.amirhoseinmusicplayer.data.mediaplayer.AudioMediaPlayer
+import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayMode
+import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayerStatus
 import com.example.amirhoseinmusicplayer.util.ImageLoader
 
 class MusicService : Service() {

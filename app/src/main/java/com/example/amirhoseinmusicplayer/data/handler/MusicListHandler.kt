@@ -1,8 +1,9 @@
-package com.example.amirhoseinmusicplayer.handler
+package com.example.amirhoseinmusicplayer.data.handler
 
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentUris
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
@@ -10,55 +11,63 @@ import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.amirhoseinmusicplayer.R
-import com.example.amirhoseinmusicplayer.activity.MusicPlayerActivity
-import com.example.amirhoseinmusicplayer.adapter.MusicClickListener
-import com.example.amirhoseinmusicplayer.adapter.MusicListAdapter
-import com.example.amirhoseinmusicplayer.data.MusicRepository
-import com.example.amirhoseinmusicplayer.mediaplayer.AudioMediaPlayer
+import com.example.amirhoseinmusicplayer.ui.activity.MusicPlayerActivity
+import com.example.amirhoseinmusicplayer.ui.adapter.MusicClickListener
+import com.example.amirhoseinmusicplayer.ui.adapter.MusicListAdapter
+import com.example.amirhoseinmusicplayer.data.repository.MusicRepository
+import com.example.amirhoseinmusicplayer.data.mediaplayer.AudioMediaPlayer
 import com.example.amirhoseinmusicplayer.model.AudioModel
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.lang.Long
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.getValue
 import kotlin.lazy
 
-class MusicListHandler(private val activity: Activity) : MusicClickListener {
 
+//class MusicListHandler(private val activity: Activity) : MusicClickListener {
+  @Singleton
+  class MusicListHandler @Inject constructor(
+    private val context: Context,
+    private val musicRepository: MusicRepository
+  ): MusicClickListener {
+
+    //private val musicRepository by lazy { MusicRepository(activity) }
     private lateinit var musicListAdapter: MusicListAdapter
-    private val musicRepository by lazy { MusicRepository(activity) }
     private var playList: List<AudioModel> = musicRepository.loadSongs()
 
     override fun onMusicClick(musicIndex: Int) {
         //navigate to another activity (intent)
         AudioMediaPlayer.startPlaying(playList, musicIndex)
-        val intent = Intent(activity, MusicPlayerActivity::class.java)
+        val intent = Intent(context, MusicPlayerActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        activity.startActivity(intent)
+        context.startActivity(intent)
     }
 
     override fun onMusicMenuItemClick(audioModel: AudioModel, itemMenu: View) {
-        val menuItemListRecyclerView = PopupMenu(activity, itemMenu)
+        val menuItemListRecyclerView = PopupMenu(context, itemMenu)
         menuItemListRecyclerView.inflate(R.menu.menu_item_recyclerview)
         menuItemListRecyclerView.show()
         menuItemListRecyclerView.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.delete -> {
-                    val builder = AlertDialog.Builder(activity)
+                    val builder = AlertDialog.Builder(context)
                         .setTitle("Are you sure to delete this music?")
                     builder.setPositiveButton("Yes") { _, _ ->
                         fileDeleted(audioModel, itemMenu)
-                        Toast.makeText(activity, "Delete Clicked!!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Delete Clicked!!", Toast.LENGTH_SHORT).show()
                     }
                     builder.setNegativeButton("No") { _, _ ->
-                        Toast.makeText(activity, "Cancel", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show()
                     }
                     builder.show()
                 }
                 R.id.share -> {
                     fileShare(audioModel, itemMenu)
-                    Toast.makeText(activity, "Share Clicked!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Share Clicked!!", Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -90,7 +99,7 @@ class MusicListHandler(private val activity: Activity) : MusicClickListener {
             shareAudio.action = Intent.ACTION_SEND
             shareAudio.type = "audio/*"
             shareAudio.putExtra(Intent.EXTRA_STREAM, uri)
-            activity.startActivity(Intent.createChooser(shareAudio, "Sharing Music File"))
+            context.startActivity(Intent.createChooser(shareAudio, "Sharing Music File"))
         } else {
             Snackbar.make(view, "Can't be Shared", Snackbar.LENGTH_LONG)
                 .show()
@@ -110,4 +119,5 @@ class MusicListHandler(private val activity: Activity) : MusicClickListener {
         val searchResult = musicRepository.search(query ?: "")
         updatePlayList(searchResult)
     }
+
 }

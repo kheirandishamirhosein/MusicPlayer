@@ -1,4 +1,4 @@
-package com.example.amirhoseinmusicplayer.adapter
+package com.example.amirhoseinmusicplayer.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

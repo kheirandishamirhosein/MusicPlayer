@@ -1,4 +1,4 @@
-package com.example.amirhoseinmusicplayer.mediaplayer
+package com.example.amirhoseinmusicplayer.data.mediaplayer
 
 import android.app.Activity
 import android.media.MediaPlayer
@@ -31,8 +31,8 @@ object AudioMediaPlayer : MediaPlayer() {
 
     fun startPlaying(songs: List<AudioModel>, index: Int = 0) {
         currentIndex = index
-        this.originalSongs = songs
-        this.songs = songs
+        originalSongs = songs
+        AudioMediaPlayer.songs = songs
         //
         play(songs[currentIndex])
         registerOnCompletionListener()
@@ -100,7 +100,7 @@ object AudioMediaPlayer : MediaPlayer() {
     }
 
     fun repeat(activity: Activity) {
-        this.onRepeat = !onRepeat
+        onRepeat = !onRepeat
         if (onRepeat) {
             Toast.makeText(activity, "Repeat ON", Toast.LENGTH_SHORT).show()
         } else {
@@ -110,7 +110,7 @@ object AudioMediaPlayer : MediaPlayer() {
     }
 
     fun shuffle(activity: Activity) {
-        this.onShuffle = !onShuffle
+        onShuffle = !onShuffle
         if (onShuffle) {
             Toast.makeText(activity, "Shuffle ON", Toast.LENGTH_SHORT).show()
         } else {
