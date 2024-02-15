@@ -15,17 +15,14 @@ import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayerStatus
 import com.example.amirhoseinmusicplayer.service.MusicService
 import com.example.amirhoseinmusicplayer.util.DurationFormatter
 import com.example.amirhoseinmusicplayer.util.ImageLoader
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MusicPlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMusicPlayerBinding
     private var mediaPlayer: AudioMediaPlayer = AudioMediaPlayer
     private var previousStatus: PlayerStatus? = null
-
-    //manual DI
-    private val musicRepository: MusicRepository by lazy {
-        MusicRepository(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

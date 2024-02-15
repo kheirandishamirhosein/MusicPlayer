@@ -8,8 +8,11 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.amirhoseinmusicplayer.model.AudioModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Singleton
 
+@Singleton
 object AudioMediaPlayer : MediaPlayer() {
     private lateinit var originalSongs: List<AudioModel>
     private lateinit var songs: List<AudioModel>

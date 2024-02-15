@@ -15,10 +15,14 @@ import com.example.amirhoseinmusicplayer.data.mediaplayer.AudioMediaPlayer
 import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayMode
 import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayerStatus
 import com.example.amirhoseinmusicplayer.util.ImageLoader
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MusicService : Service() {
     private lateinit var mediaSession: MediaSessionCompat
-    private val mediaPlayer = AudioMediaPlayer
+    //private val mediaPlayer = AudioMediaPlayer
+    @Inject lateinit var mediaPlayer: AudioMediaPlayer
 
     private val observer = object : Observer<PlayerStatus?> {
         override fun onChanged(status: PlayerStatus?) {
