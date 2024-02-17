@@ -1,6 +1,5 @@
 package com.example.amirhoseinmusicplayer.data.handler
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentUris
 import android.content.Context
@@ -24,18 +23,14 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.Boolean
 import kotlin.Int
-import kotlin.getValue
-import kotlin.lazy
 
 
-//class MusicListHandler(private val activity: Activity) : MusicClickListener {
   @Singleton
   class MusicListHandler @Inject constructor(
     private val context: Context,
     private val musicRepository: MusicRepository
   ): MusicClickListener {
 
-    //private val musicRepository by lazy { MusicRepository(activity) }
     private lateinit var musicListAdapter: MusicListAdapter
     private var playList: List<AudioModel> = musicRepository.loadSongs()
 

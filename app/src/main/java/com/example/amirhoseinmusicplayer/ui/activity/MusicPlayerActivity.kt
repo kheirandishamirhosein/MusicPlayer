@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.amirhoseinmusicplayer.R
-import com.example.amirhoseinmusicplayer.data.repository.MusicRepository
 import com.example.amirhoseinmusicplayer.databinding.ActivityMusicPlayerBinding
 import com.example.amirhoseinmusicplayer.data.mediaplayer.AudioMediaPlayer
 import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayMode

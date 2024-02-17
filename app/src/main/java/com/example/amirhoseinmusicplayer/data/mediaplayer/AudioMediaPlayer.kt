@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.amirhoseinmusicplayer.model.AudioModel
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Singleton
 
