@@ -24,11 +24,8 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     private var recyclerViewMusic: RecyclerView? = null
     private lateinit var musicListAdapter: MusicListAdapter
-    // inject musicRepository & musicListHandler
     @Inject lateinit var musicRepository: MusicRepository
     @Inject lateinit var musicListHandler: MusicListHandler
-    //private val musicRepository by lazy { MusicRepository(this) }
-    //private val musicListHandler: MusicListHandler by lazy { MusicListHandler(this) }
 
     @SuppressLint("Recycle", "NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {

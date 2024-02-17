@@ -23,7 +23,7 @@ import kotlin.arrayOf
 class MusicRepository @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    //private val context = context.applicationContext
+
     private var songsList: List<AudioModel>? = null
 
     fun loadSongs(): List<AudioModel> {

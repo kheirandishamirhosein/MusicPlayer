@@ -21,7 +21,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MusicService : Service() {
     private lateinit var mediaSession: MediaSessionCompat
-    //private val mediaPlayer = AudioMediaPlayer
     @Inject lateinit var mediaPlayer: AudioMediaPlayer
 
     private val observer = object : Observer<PlayerStatus?> {
@@ -155,4 +154,5 @@ class MusicService : Service() {
         const val EXIT = "exit"
         const val NOTIF_ID = 777
     }
+
 }

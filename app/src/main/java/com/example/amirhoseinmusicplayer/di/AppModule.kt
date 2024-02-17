@@ -1,9 +1,7 @@
 package com.example.amirhoseinmusicplayer.di
 
-import android.app.Activity
 import android.app.Application
 import android.content.Context
-import com.example.amirhoseinmusicplayer.data.handler.MusicListHandler
 import com.example.amirhoseinmusicplayer.data.repository.MusicRepository
 import dagger.Module
 import dagger.Provides
@@ -16,7 +14,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-
     @Provides
     @Singleton
     fun provideApplicationContext(application: Application): Context {
@@ -28,13 +25,5 @@ class AppModule {
     fun provideMusicRepository(@ApplicationContext context: Context): MusicRepository {
         return MusicRepository(context)
     }
-
-/*
-    @Provides
-    @Singleton
-    fun provideMusicListHandler(activity: Activity, musicRepository: MusicRepository): MusicListHandler {
-        return MusicListHandler(activity, musicRepository)
-    }
- */
 
 }

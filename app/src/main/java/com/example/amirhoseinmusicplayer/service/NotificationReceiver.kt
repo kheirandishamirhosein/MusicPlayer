@@ -9,7 +9,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class NotificationReceiver : BroadcastReceiver() {
-    //private val mediaPlayer: AudioMediaPlayer = AudioMediaPlayer
     @Inject lateinit var mediaPlayer: AudioMediaPlayer
     override fun onReceive(context: Context?, intent: Intent?) {
         when (intent?.action) {

@@ -14,7 +14,6 @@ import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayMode
 import com.example.amirhoseinmusicplayer.data.mediaplayer.PlayerStatus
 import com.example.amirhoseinmusicplayer.model.AudioModel
 import com.example.amirhoseinmusicplayer.util.ImageLoader
-import dagger.hilt.android.AndroidEntryPoint
 
 class NowPlayingMusic : Fragment() {
 
