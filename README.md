@@ -35,7 +35,8 @@ Service Notification
 9. material design
 10. class Application
 11. service for notification
-13. oop
+12. oop
+13. DI(dagger-hilt)
 ---------------
 Music player components for users to use:
 1. list songs
