@@ -69,16 +69,12 @@ object AudioMediaPlayer : MediaPlayer() {
     }
 
     fun toggle() {
-        if (mode == PlayMode.PLAY) {
+        if (isPlaying) {
             mode = PlayMode.PAUSE
             pause()
-        } else if (mode == PlayMode.STOP) {
-            startPlaying(originalSongs, currentIndex)
         } else {
             mode = PlayMode.PLAY
-            if (!isPlaying) {
-                start()
-            }
+            start()
         }
         calculateStatus()
     }
@@ -143,24 +139,39 @@ object AudioMediaPlayer : MediaPlayer() {
 
     override fun stop() {
         handler.removeCallbacks(runnable)
+        if (isPlaying) {
+            try {
+                super.stop()
+            } catch (e: IllegalStateException) {
+                e.printStackTrace()
+            }
+        }
         mode = PlayMode.STOP
-        super.stop()
-        release()
+        if (isPlaying) {
+            super.release()
+        }
         calculateStatus()
     }
 
     private fun calculateStatus() {
-        if (mode != PlayMode.STOP) {
-            val status = PlayerStatus(
-                mode = mode,
-                currentPosition = if (mode != PlayMode.STOP) currentPosition else 0,
-                onRepeat = onRepeat,
-                onShuffle = onShuffle,
-                currentSong = songs[currentIndex]
-            )
-            statusLiveData.value = status
+        val currentPosition = if (isPlaying) {
+            try {
+                currentPosition
+            } catch (e: IllegalStateException) {
+                0
+            }
+        } else {
+            0
         }
-    }
 
+        val status = PlayerStatus(
+            mode = mode,
+            currentPosition = currentPosition,
+            onRepeat = onRepeat,
+            onShuffle = onShuffle,
+            currentSong = songs[currentIndex]
+        )
+        statusLiveData.value = status
+    }
 
 }
