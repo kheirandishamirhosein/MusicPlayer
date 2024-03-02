@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.amirhoseinmusicplayer.R
 import com.example.amirhoseinmusicplayer.model.AudioModel
@@ -94,12 +95,17 @@ class MusicListAdapter(
             tvMusicArtist.text = audioModel.artist
             tvMusicTime.text = audioModel.formattedDuration
             val image = ImageLoader.getAlbumArt(audioModel.path)
-            Glide.with(ivMusicImage)
+            Glide.with(ivMusicImage.context)
                 .load(image)
-                .apply(RequestOptions().placeholder(R.drawable.ic_music_list).centerCrop())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .thumbnail(0.20f)
+                .placeholder(R.drawable.ic_music_list)
+                .centerCrop()
+                .override(200,200)
                 .into(ivMusicImage)
-        }
 
+
+        }
     }
 }
 
