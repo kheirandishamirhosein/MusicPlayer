@@ -9,8 +9,10 @@ import android.view.View
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.amirhoseinmusicplayer.R
@@ -76,6 +78,7 @@ class MainActivity : AppCompatActivity() {
                 )
         }
     }
+
 
     //search
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

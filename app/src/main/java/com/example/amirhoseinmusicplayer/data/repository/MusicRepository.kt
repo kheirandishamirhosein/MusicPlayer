@@ -6,10 +6,12 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import com.example.amirhoseinmusicplayer.model.AudioModel
 import com.example.amirhoseinmusicplayer.util.DurationFormatter
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
+import java.lang.Exception
 import java.lang.Long
 import java.util.*
 import javax.inject.Inject
@@ -57,7 +59,6 @@ class MusicRepository @Inject constructor(
                 image = cursor.getString(5),
                 formattedDuration = formatDuration(duration)
             )
-
             if (File(songData.path).exists()) songsList.add(songData)
         }
         songsList.sortBy { it.title }
@@ -71,16 +72,22 @@ class MusicRepository @Inject constructor(
     }
 
     fun removeSong(audioModel: AudioModel): Boolean {
-        val uri: Uri = ContentUris.withAppendedId(
-            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-            Long.parseLong(audioModel.id)
-        )
-        val deleteFile = File(audioModel.path)
-        val deleted: Boolean = deleteFile.delete() // delete your file
-        context.contentResolver.delete(uri, null, null)
-        val list = songsList ?: return deleted
-        songsList = list.minus(audioModel)
-        return deleted
+        try {
+            val uri: Uri = ContentUris.withAppendedId(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                Long.parseLong(audioModel.id)
+            )
+            val deleteFile = File(audioModel.path)
+            val deleted: Boolean = deleteFile.delete() // delete your file
+            context.contentResolver.delete(uri, null, null)
+            val list = songsList ?: return deleted
+            songsList = list.minus(audioModel)
+            return deleted
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            Log.e("khkhkh", "${ex.message}")
+            return false
+        }
     }
 
     fun search(query: String): List<AudioModel> {

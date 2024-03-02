@@ -43,31 +43,32 @@ import kotlin.Int
     }
 
     override fun onMusicMenuItemClick(audioModel: AudioModel, itemMenu: View) {
-        val menuItemListRecyclerView = PopupMenu(context, itemMenu)
-        menuItemListRecyclerView.inflate(R.menu.menu_item_recyclerview)
-        menuItemListRecyclerView.show()
-        menuItemListRecyclerView.setOnMenuItemClickListener {
-            when (it.itemId) {
+        //در قسمت ایجاد PopupMenu
+        val popupMenu = PopupMenu(itemMenu.context, itemMenu)
+        popupMenu.menuInflater.inflate(R.menu.menu_item_recyclerview, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
                 R.id.delete -> {
-                    val builder = AlertDialog.Builder(context)
-                        .setTitle("Are you sure to delete this music?")
+                    val builder = AlertDialog.Builder(itemMenu.context)
+                    builder.setTitle("Are you sure to delete this music?")
                     builder.setPositiveButton("Yes") { _, _ ->
                         fileDeleted(audioModel, itemMenu)
-                        Toast.makeText(context, "Delete Clicked!!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(itemMenu.context, "Delete Clicked!!", Toast.LENGTH_SHORT).show()
                     }
                     builder.setNegativeButton("No") { _, _ ->
-                        Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(itemMenu.context, "Cancel", Toast.LENGTH_SHORT).show()
                     }
                     builder.show()
                 }
                 R.id.share -> {
                     fileShare(audioModel, itemMenu)
-                    Toast.makeText(context, "Share Clicked!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(itemMenu.context, "Share Clicked!!", Toast.LENGTH_SHORT).show()
                 }
-
             }
             return@setOnMenuItemClickListener true
         }
+        popupMenu.show()
+
     }
 
     //delete file
